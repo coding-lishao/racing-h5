@@ -14,6 +14,10 @@ export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height:
   ctx.fillStyle = '#26345b'
   ctx.fillRect(20, 0, 4, viewHeight)
   ctx.fillRect(336, 0, 4, viewHeight)
+  ctx.save()
+  ctx.beginPath()
+  ctx.rect(20, 0, gameConfig.roadWidth, viewHeight)
+  ctx.clip()
   ctx.strokeStyle = 'rgba(159, 193, 255, .28)'
   ctx.lineWidth = 3
   ctx.setLineDash([34, 28])
@@ -37,7 +41,33 @@ export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height:
     else if (item.kind === 'nitro') drawNitro(ctx, item.x + 20, item.y + 20)
     else drawCar(ctx, item.x, item.y, '#ff5f6d', '#ffb36b', .82)
   }
+  if (nitroActive) drawNitroTrail(ctx, playerX + 21, 584, elapsed)
   drawCar(ctx, playerX, 520, car.color, car.accent, 1)
+  ctx.restore()
+  ctx.restore()
+}
+
+export const getNitroTrail = (elapsed: number): { length: number; width: number } => ({
+  length: 48 + Math.sin(elapsed * 28) * 12,
+  width: 20 + Math.cos(elapsed * 24) * 5,
+})
+
+const drawNitroTrail = (ctx: CanvasRenderingContext2D, x: number, y: number, elapsed: number): void => {
+  const trail = getNitroTrail(elapsed)
+  ctx.save()
+  ctx.globalCompositeOperation = 'lighter'
+  ctx.shadowColor = '#5ceeff'
+  ctx.shadowBlur = 22
+  const outer = ctx.createLinearGradient(x, y, x, y + trail.length)
+  outer.addColorStop(0, '#ffffff')
+  outer.addColorStop(.25, '#66efff')
+  outer.addColorStop(1, 'rgba(42, 123, 255, 0)')
+  ctx.fillStyle = outer
+  ctx.beginPath(); ctx.moveTo(x - trail.width, y); ctx.lineTo(x + trail.width, y); ctx.lineTo(x, y + trail.length); ctx.closePath(); ctx.fill()
+  ctx.shadowColor = '#fff5a8'
+  ctx.shadowBlur = 12
+  ctx.fillStyle = '#fff5a8'
+  ctx.beginPath(); ctx.moveTo(x - trail.width * .38, y); ctx.lineTo(x + trail.width * .38, y); ctx.lineTo(x, y + trail.length * .62); ctx.closePath(); ctx.fill()
   ctx.restore()
 }
 
