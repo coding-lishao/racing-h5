@@ -2,7 +2,7 @@ import type { CarDefinition } from '../types'
 import { gameConfig } from '../data/gameConfig'
 import type { RoadItem } from './entities'
 
-export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height: number, car: CarDefinition, playerX: number, items: RoadItem[], elapsed: number): void => {
+export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height: number, car: CarDefinition, playerX: number, items: RoadItem[], elapsed: number, nitroActive: boolean): void => {
   const scale = width / 360
   ctx.save()
   ctx.scale(scale, scale)
@@ -23,6 +23,14 @@ export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height:
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, viewHeight); ctx.stroke()
   }
   ctx.setLineDash([])
+  if (nitroActive) {
+    ctx.strokeStyle = 'rgba(118, 241, 255, .75)'
+    ctx.lineWidth = 2
+    for (let line = 0; line < 10; line += 1) {
+      const y = (elapsed * 300 + line * 76) % viewHeight
+      ctx.beginPath(); ctx.moveTo(30 + line * 31, y); ctx.lineTo(30 + line * 31, y + 34); ctx.stroke()
+    }
+  }
   for (const item of items) {
     if (item.collected) continue
     if (item.kind === 'coin') drawCoin(ctx, item.x + 20, item.y + 20)

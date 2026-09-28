@@ -62,7 +62,7 @@ export class RaceEngine {
     this.collisionCooldown = Math.max(0, this.collisionCooldown - safeDelta)
     this.nitroBoostTime = Math.max(0, this.nitroBoostTime - safeDelta)
     const nitroActive = this.nitroBoostTime > 0 && this.nitroAmount > 0
-    const speed = Math.min(gameConfig.maxSpeed, gameConfig.baseSpeed + this.elapsed * 4 + this.car.speed * 8) * (nitroActive ? 1.45 : 1)
+    const speed = this.getCurrentSpeed(nitroActive)
     if (nitroActive) this.nitroAmount = Math.max(0, this.nitroAmount - safeDelta * 24)
     else this.nitroAmount = Math.min(100, this.nitroAmount + safeDelta * 3)
     this.playerX = clampPlayerX(this.playerX + this.steer * this.car.handling * 70 * safeDelta, 10, gameConfig.roadWidth - gameConfig.playerWidth - 10)
@@ -91,13 +91,15 @@ export class RaceEngine {
   }
 
   public getSnapshot(): RaceSnapshot {
-    const speed = Math.min(gameConfig.maxSpeed, gameConfig.baseSpeed + this.elapsed * 4 + this.car.speed * 8)
-    return { score: this.score, distance: Math.floor(this.distance), coins: this.coins, health: this.health, nitro: Math.round(this.nitroAmount), speed, running: this.running, paused: this.paused }
+    const nitroActive = this.nitroBoostTime > 0 && this.nitroAmount > 0
+    return { score: this.score, distance: Math.floor(this.distance), coins: this.coins, health: this.health, nitro: Math.round(this.nitroAmount), speed: this.getCurrentSpeed(nitroActive), nitroActive, running: this.running, paused: this.paused }
   }
 
-  public getRenderState(): { playerX: number; items: RoadItem[]; elapsed: number } {
-    return { playerX: this.playerX, items: this.items, elapsed: this.elapsed }
+  public getRenderState(): { playerX: number; items: RoadItem[]; elapsed: number; nitroActive: boolean } {
+    return { playerX: this.playerX, items: this.items, elapsed: this.elapsed, nitroActive: this.nitroBoostTime > 0 && this.nitroAmount > 0 }
   }
+
+  private getCurrentSpeed(nitroActive: boolean): number { return Math.min(gameConfig.maxSpeed, gameConfig.baseSpeed + this.elapsed * 4 + this.car.speed * 8) * (nitroActive ? 1.75 : 1) }
 
   private emit(): void { this.onChange?.(this.getSnapshot()) }
 }

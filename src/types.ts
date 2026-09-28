@@ -30,6 +30,7 @@ export type RaceSnapshot = {
   health: number
   nitro: number
   speed: number
+  nitroActive: boolean
   running: boolean
   paused: boolean
 }

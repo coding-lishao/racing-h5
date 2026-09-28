@@ -14,5 +14,6 @@ describe('race engine nitro', () => {
     engine.handleInput({ steer: 0, nitro: false })
     engine.update(0.1)
     expect(engine.getSnapshot().distance).toBeGreaterThan(normalEngine.getSnapshot().distance)
+    expect(engine.getSnapshot().nitroActive).toBe(true)
   })
 })
