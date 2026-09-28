@@ -4,6 +4,7 @@ import { clampPlayerX, rectanglesOverlap, shouldApplyCollision } from './collisi
 import type { RaceInput, RaceSnapshot } from '../types'
 import type { RoadItem } from './entities'
 import { createSpawnRow } from './spawner'
+import { createFeedback, type FeedbackEvent } from './feedback'
 
 export class RaceEngine {
   private readonly car: CarDefinition
@@ -61,6 +62,7 @@ export class RaceEngine {
     this.spawnClock -= safeDelta
     this.collisionCooldown = Math.max(0, this.collisionCooldown - safeDelta)
     this.nitroBoostTime = Math.max(0, this.nitroBoostTime - safeDelta)
+    let feedback: FeedbackEvent | null = null
     const nitroActive = this.nitroBoostTime > 0 && this.nitroAmount > 0
     const speed = this.getCurrentSpeed(nitroActive)
     if (nitroActive) this.nitroAmount = Math.max(0, this.nitroAmount - safeDelta * 24)
@@ -77,22 +79,23 @@ export class RaceEngine {
       item.x = 25 + item.lane * 78 + (item.kind === 'coin' ? 12 : 0)
       if (!item.collected && rectanglesOverlap({ x: this.playerX, y: 520, width: gameConfig.playerWidth, height: gameConfig.playerHeight }, item)) {
         item.collected = true
-        if (item.kind === 'coin') this.coins += 1
-        else if (item.kind === 'nitro') this.nitroAmount = Math.min(100, this.nitroAmount + 35)
+        if (item.kind === 'coin') { this.coins += 1; feedback = createFeedback('coin', 1) }
+        else if (item.kind === 'nitro') { this.nitroAmount = Math.min(100, this.nitroAmount + 35); feedback = createFeedback('nitro', 35) }
         else if (shouldApplyCollision(this.collisionCooldown)) {
           this.health -= 1
           this.collisionCooldown = 0.6
+          feedback = createFeedback('collision')
           if (this.health <= 0) this.stop()
         }
       }
     }
     while (this.items.length && this.items[0].y > 900) this.items.shift()
-    this.emit()
+    this.emit(feedback)
   }
 
-  public getSnapshot(): RaceSnapshot {
+  public getSnapshot(feedback: FeedbackEvent | null = null): RaceSnapshot {
     const nitroActive = this.nitroBoostTime > 0 && this.nitroAmount > 0
-    return { score: this.score, distance: Math.floor(this.distance), coins: this.coins, health: this.health, nitro: Math.round(this.nitroAmount), speed: this.getCurrentSpeed(nitroActive), nitroActive, running: this.running, paused: this.paused }
+    return { score: this.score, distance: Math.floor(this.distance), coins: this.coins, health: this.health, nitro: Math.round(this.nitroAmount), speed: this.getCurrentSpeed(nitroActive), nitroActive, feedback, running: this.running, paused: this.paused }
   }
 
   public getRenderState(): { playerX: number; items: RoadItem[]; elapsed: number; nitroActive: boolean } {
@@ -101,5 +104,5 @@ export class RaceEngine {
 
   private getCurrentSpeed(nitroActive: boolean): number { return Math.min(gameConfig.maxSpeed, gameConfig.baseSpeed + this.elapsed * 4 + this.car.speed * 8) * (nitroActive ? 1.75 : 1) }
 
-  private emit(): void { this.onChange?.(this.getSnapshot()) }
+  private emit(feedback: FeedbackEvent | null = null): void { this.onChange?.(this.getSnapshot(feedback)) }
 }

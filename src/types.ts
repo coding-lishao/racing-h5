@@ -31,6 +31,7 @@ export type RaceSnapshot = {
   nitro: number
   speed: number
   nitroActive: boolean
+  feedback: import('./game/feedback').FeedbackEvent | null
   running: boolean
   paused: boolean
 }
