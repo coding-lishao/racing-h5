@@ -14,6 +14,7 @@ export class RaceEngine {
   private playerX = 139
   private steer = 0
   private nitroHeld = false
+  private nitroBoostTime = 0
   private nitroAmount = 100
   private score = 0
   private distance = 0
@@ -48,6 +49,7 @@ export class RaceEngine {
   }
 
   public handleInput(input: RaceInput): void {
+    if (input.nitro && !this.nitroHeld && this.nitroAmount > 0) this.nitroBoostTime = Math.max(this.nitroBoostTime, 1.4)
     this.steer = input.steer
     this.nitroHeld = input.nitro
   }
@@ -58,7 +60,8 @@ export class RaceEngine {
     this.elapsed += safeDelta
     this.spawnClock -= safeDelta
     this.collisionCooldown = Math.max(0, this.collisionCooldown - safeDelta)
-    const nitroActive = this.nitroHeld && this.nitroAmount > 0
+    this.nitroBoostTime = Math.max(0, this.nitroBoostTime - safeDelta)
+    const nitroActive = this.nitroBoostTime > 0 && this.nitroAmount > 0
     const speed = Math.min(gameConfig.maxSpeed, gameConfig.baseSpeed + this.elapsed * 4 + this.car.speed * 8) * (nitroActive ? 1.45 : 1)
     if (nitroActive) this.nitroAmount = Math.max(0, this.nitroAmount - safeDelta * 24)
     else this.nitroAmount = Math.min(100, this.nitroAmount + safeDelta * 3)

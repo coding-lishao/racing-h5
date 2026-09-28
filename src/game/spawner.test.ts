@@ -9,4 +9,10 @@ describe('spawn rows', () => {
       expect(row.some((item) => item.lane === 1)).toBe(false)
     }
   })
+
+  it('creates collectible coins and nitro items across normal spawn rows', () => {
+    const kinds = Array.from({ length: 40 }, (_, seed) => createSpawnRow(seed + 20, 4, 1).map((item) => item.kind)).flat()
+    expect(kinds).toContain('coin')
+    expect(kinds).toContain('nitro')
+  })
 })
