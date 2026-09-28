@@ -2,11 +2,9 @@ import type { CarDefinition } from '../types'
 import { gameConfig } from '../data/gameConfig'
 import type { RoadItem } from './entities'
 
-export const renderRace = (ctx: CanvasRenderingContext2D, width: number, height: number, car: CarDefinition, playerX: number, items: RoadItem[], elapsed: number, nitroActive: boolean): void => {
-  const scale = width / 360
+export const renderRace = (ctx: CanvasRenderingContext2D, _width: number, _height: number, car: CarDefinition, playerX: number, items: RoadItem[], elapsed: number, nitroActive: boolean): void => {
   ctx.save()
-  ctx.scale(scale, scale)
-  const viewHeight = height / scale
+  const viewHeight = 700
   ctx.fillStyle = '#080b18'
   ctx.fillRect(0, 0, 360, viewHeight)
   ctx.fillStyle = '#111a32'
