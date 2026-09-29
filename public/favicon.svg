@@ -1,20 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="霓虹赛车图标">
-  <defs>
-    <linearGradient id="car" x1="16" y1="10" x2="48" y2="55" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#8cffff"/>
-      <stop offset="1" stop-color="#398dff"/>
-    </linearGradient>
-    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect width="64" height="64" rx="15" fill="#080b18"/>
-  <g filter="url(#glow)">
-    <path d="M23 51h-5V31c0-6 3-12 8-16l4-3 4 3c5 4 8 10 8 16v20h-5" fill="none" stroke="url(#car)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
-    <path d="M23 24h18l3 12H20l3-12Z" fill="#ff5ecb" stroke="#bfffff" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M22 43h20" stroke="#bfffff" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="24" cy="47" r="4" fill="#ffe873"/>
-    <circle cx="40" cy="47" r="4" fill="#ffe873"/>
-  </g>
+  <rect width="64" height="64" rx="14" fill="#080b18"/>
+  <path d="M17 49V29c0-8 5-14 15-17 10 3 15 9 15 17v20c0 2-2 3-4 3H21c-2 0-4-1-4-3Z" fill="#55dfff"/>
+  <path d="M23 24h18l3 13H20l3-13Z" fill="#1c2150"/>
+  <rect x="21" y="41" width="7" height="6" rx="2" fill="#ffdf62"/>
+  <rect x="36" y="41" width="7" height="6" rx="2" fill="#ffdf62"/>
+  <path d="M17 32h6M41 32h6" stroke="#ff86da" stroke-width="4" stroke-linecap="round"/>
 </svg>
