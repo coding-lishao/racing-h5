@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="霓虹竞速图标">
+  <defs>
+    <linearGradient id="bg" x1="16" y1="8" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172c67"/>
+      <stop offset="1" stop-color="#080b18"/>
+    </linearGradient>
+    <linearGradient id="body" x1="36" y1="30" x2="92" y2="104" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8df7ff"/>
+      <stop offset=".48" stop-color="#52bfff"/>
+      <stop offset="1" stop-color="#8c4dff"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="43" y1="38" x2="85" y2="68" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e6ffff"/>
+      <stop offset="1" stop-color="#2d5bc7"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <path d="M18 102 29 76M110 102 99 76" stroke="#ff62d8" stroke-width="6" stroke-linecap="round" opacity=".8" filter="url(#glow)"/>
+  <g filter="url(#glow)">
+    <path d="M39 30h50l14 54v19H25V84l14-54Z" fill="url(#body)"/>
+    <path d="m43 38-7 27h56l-7-27H43Z" fill="url(#glass)"/>
+    <path d="M39 72h50" stroke="#ecffff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+    <path d="M31 86h14M83 86h14" stroke="#efffff" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <path d="M30 102h68" stroke="#79f4ff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+</svg>
