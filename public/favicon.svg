@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="霓虹赛车图标">
   <rect width="64" height="64" rx="14" fill="#080b18"/>
-  <path d="M17 49V29c0-8 5-14 15-17 10 3 15 9 15 17v20c0 2-2 3-4 3H21c-2 0-4-1-4-3Z" fill="#55dfff"/>
-  <path d="M23 24h18l3 13H20l3-13Z" fill="#1c2150"/>
-  <rect x="21" y="41" width="7" height="6" rx="2" fill="#ffdf62"/>
-  <rect x="36" y="41" width="7" height="6" rx="2" fill="#ffdf62"/>
-  <path d="M17 32h6M41 32h6" stroke="#ff86da" stroke-width="4" stroke-linecap="round"/>
+  <path d="M8 42h9l7-13h20l9 13h3c3 0 5 2 5 5v8H8v-8c0-3 0-5 0-5Z" fill="#55dfff"/>
+  <path d="M26 29h17l5 13H19l7-13Z" fill="#ff5ecb"/>
+  <circle cx="20" cy="53" r="7" fill="#0c1230" stroke="#ffe873" stroke-width="3"/>
+  <circle cx="49" cy="53" r="7" fill="#0c1230" stroke="#ffe873" stroke-width="3"/>
+  <path d="M11 44h8M53 44h5" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
 </svg>
