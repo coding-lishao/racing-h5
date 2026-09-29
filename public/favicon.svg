@@ -1,25 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="霓虹竞速图标">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="霓虹赛车图标">
   <defs>
-    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#192d62"/>
-      <stop offset="1" stop-color="#070a17"/>
-    </linearGradient>
-    <linearGradient id="track" x1="12" y1="47" x2="51" y2="15" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#42bfff"/>
-      <stop offset="1" stop-color="#9b82ff"/>
-    </linearGradient>
-    <linearGradient id="speed" x1="44" y1="11" x2="20" y2="53" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ff8be8"/>
-      <stop offset="1" stop-color="#ff3f9a"/>
+    <linearGradient id="car" x1="16" y1="10" x2="48" y2="55" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8cffff"/>
+      <stop offset="1" stop-color="#398dff"/>
     </linearGradient>
     <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
-  <path d="M13 47c1-17 12-29 27-31 5-1 9 0 12 2" fill="none" stroke="url(#track)" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
-  <path d="M45 12 20 52" fill="none" stroke="url(#speed)" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
-  <path d="M13 47c1-17 12-29 27-31" fill="none" stroke="#d7ffff" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-  <circle cx="48" cy="18" r="3" fill="#fff" filter="url(#glow)"/>
+  <rect width="64" height="64" rx="15" fill="#080b18"/>
+  <g filter="url(#glow)">
+    <path d="M23 51h-5V31c0-6 3-12 8-16l4-3 4 3c5 4 8 10 8 16v20h-5" fill="none" stroke="url(#car)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M23 24h18l3 12H20l3-12Z" fill="#ff5ecb" stroke="#bfffff" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M22 43h20" stroke="#bfffff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="24" cy="47" r="4" fill="#ffe873"/>
+    <circle cx="40" cy="47" r="4" fill="#ffe873"/>
+  </g>
 </svg>
